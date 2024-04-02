@@ -1,6 +1,6 @@
 import { client } from "../client";
 
 export async function fetchAllProducts() {
-    const data = client.fetch('*[_type == "products"]')
+    const data = await client.fetch('*[_type == "products"]')
     return data
 }

@@ -15,7 +15,7 @@ const [cart, setCart] = useState([])
   return (
     <Layout cart={cart} setCart={setCart} amount={amount} category={category}>
         <Routes>
-            <Route path="/" element={<Home />}/>
+            <Route path="/" element={<Home setAmount={setAmount} cart={cart} setCart={setCart} />}/>
             <Route path="/produkter/:id" element={<ContentPage amount={amount} setAmount={setAmount} category={category} setCart={setCart} cart={cart}/>}/>
         </Routes>
     </Layout>

@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
-export default function ProductCard({category, img, title, price, setAmount, prodid, setCart, cart}){
+export default function ProductCard({productInfo, setAmount, setCart, cart}){
  const [product, setProduct] = useState({
-  title: title,
-  price: price,
-  prodid: prodid
+  title: productInfo.productname,
+  price: productInfo.price,
+  prodid: productInfo._id
  })
 
  useEffect(()=>{
@@ -26,10 +26,10 @@ export default function ProductCard({category, img, title, price, setAmount, pro
  
     return(
       <article>
-        <img src={"/website_images/PROD_"+img} alt={title} />
-        <a href="#">{category}</a>
-        <h3>{title}</h3>
-        <span>Kr.{price}</span>
+        <img src={"/website_images/PROD_master_wu.webp"} alt={productInfo.productname} />
+        <a href="#">KATEGORINAVN</a>
+        <h3>{productInfo.productname}</h3>
+        <span>Kr.{productInfo.price}</span>
         <button onClick={handleClick}>Legg i handlekurv</button>
       </article>
     )
