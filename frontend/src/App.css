@@ -43,7 +43,9 @@ header {
     padding: 2rem 1rem;
     position: relative;
 }
-#logo { max-width: 15rem; }
+header a {width: 100%; max-width: 15rem; }
+#logo { width: 100%; max-width: 15rem; }
+
 header button {
     min-width: 3rem;
     padding: 0;
@@ -174,7 +176,7 @@ main h2 {
     text-transform: uppercase;
     margin: 0;
 }
-main article {
+main article.productCard {
     max-width: 31%;
     flex-grow: 1;
     box-sizing: border-box;
@@ -183,25 +185,25 @@ main article {
     color: var(--white);
     border-bottom: 1rem solid var(--green);
 }
-main article img {
+main article.productCard img {
     max-width: 100%;
     height: auto;
 }
-main article h3 {
+main article.productCard h3 {
     margin: 0.25rem 0;
     text-transform: uppercase;
 }
-main article a {
+main article.productCard a {
     color: var(--yellow);
     text-decoration: none;
     font-size: 1rem;
 }
-main article span {
+main article.productCard span {
     display: block;
     margin-bottom: 0.5rem;
     font-size: 1rem;
 }
-main article button {
+main article.productCard button {
     background-color: var(--green);
     border: none;
     font-family: var(--font);
@@ -209,4 +211,27 @@ main article button {
     padding: 0.5rem 1rem;
     cursor: pointer;
     font-size: 1rem;
+}
+
+/* PRODUKTSIDE */
+#productpage {
+    display: flex;
+    gap: 1rem;
+}
+#productpage h2 {
+    text-align: left;
+}
+#productpage img {
+    max-width: 60%;
+}
+.priceview {
+    font-size: 2rem;
+    color: var(--green);
+}
+#productpage article {
+    flex-grow: 1;
+}
+#productpage .metainfo {
+    display: flex;
+    justify-content: space-between;
 }

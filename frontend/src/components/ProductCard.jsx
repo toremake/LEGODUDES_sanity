@@ -27,7 +27,7 @@ export default function ProductCard({productInfo, setAmount, setCart, cart}){
   }
  
     return(
-      <article>
+      <article className="productCard">
         <img src={productInfo.image} alt={productInfo.productname} />
         <Link to={"/produkter/" + productInfo.catslug}>{productInfo.catname}</Link>
         <h3>{productInfo.productname}</h3>

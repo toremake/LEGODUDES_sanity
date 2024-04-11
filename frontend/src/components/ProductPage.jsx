@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import {useParams} from 'react-router-dom'
+import {Link, useParams} from 'react-router-dom'
 import { fetchProductBySlug } from '../../sanity/services/productServices'
 
 export default function ProductPage() {
@@ -15,10 +15,23 @@ export default function ProductPage() {
         getProductBySlug(slug)
     }, [slug])
 
+    console.log("Product", product)
+
     if(product) {
         return (
-            <main>
-                <h2>{product?.productname}</h2>
+            <main id="productpage">
+                <figure>
+                    <img src={product?.image} alt={`Produktbilde av LEGO-figuren ${product?.productname}`} />
+                </figure>
+                <article>
+                    <h2>{product?.productname}</h2>
+                    <p className="metainfo">
+                        <Link to={"/produkter/" + product?.catslug}>{product?.categoryname}</Link>
+                        <span className="stockcount">{product?.stock === 0 ? "Tomt" : product?.stock} på lager</span>
+                    </p>
+                    <p>{product?.description}</p>
+                    <p className="priceview">Kr. {product?.price}</p>
+                </article>
             </main>
         )
     } else {
