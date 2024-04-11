@@ -33,6 +33,7 @@ export default function ProductCard({productInfo, setAmount, setCart, cart}){
         <h3>{productInfo.productname}</h3>
         <span>Kr.{productInfo.price}</span>
         <button onClick={handleClick}>Legg i handlekurv</button>
+        <Link to={"/produkt/" + productInfo.slug}>Les mer</Link>
       </article>
     )
   }
