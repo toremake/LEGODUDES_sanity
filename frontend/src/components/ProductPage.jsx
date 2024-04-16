@@ -4,6 +4,26 @@ import { fetchProductBySlug } from '../../sanity/services/productServices'
 
 //Komponent for å hente et bestemt produkt basert på produktets slug i Sanity
 export default function ProductPage() {
+    //States for å lagre skjemainformasjon
+    const [reviewer, setReviewer] = useState("")
+    const [comment, setComment] = useState("")
+    const [rating, setRating] = useState(0)
+
+    //handeChange-funksjoner for felter
+    const handleReviewerChange = (e) => {
+        e.preventDefault()
+        setReviewer(e.target.value)
+    }
+    const handleCommentChange = (e) => {
+        e.preventDefault()
+        setComment(e.target.value)
+    }
+    const handleRatingChange = (e) => {
+        e.preventDefault()
+        setRating(e.target.value)
+    }
+
+
     //Hent slug fra URL
     const {slug} = useParams()
     //Sett en state vi kan lagre produktinformasjon i
@@ -39,15 +59,15 @@ export default function ProductPage() {
                     <form>
                         <p>
                             <label htmlFor="reviewer">Ditt navn:</label><br />
-                            <input name="reviewer" id="reviewer" type="text" />
+                            <input name="reviewer" id="reviewer" onChange={handleReviewerChange} type="text" />
                         </p>
                         <p>
                             <label htmlFor='comment'>Kommentar:</label><br />
-                            <textarea name="comment" id="comment"></textarea>
+                            <textarea name="comment" id="comment" onChange={handleCommentChange}></textarea>
                         </p>
                         <p>
                             <label htmlFor="rating">Vurdering:</label><br />
-                            <select name="rating" id="rating">
+                            <select name="rating" id="rating" onChange={handleRatingChange}>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
