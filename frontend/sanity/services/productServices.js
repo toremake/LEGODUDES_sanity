@@ -25,7 +25,8 @@ export async function fetchProductBySlug(slug) {
         "catslug": category->categoryurl.current,
         "image": productimage.asset->url,
         price,
-        stock
+        stock,
+        reviews
     }`, {slug})
     return data
 }

@@ -42,6 +42,12 @@ export const products = {
             title: "Lager",
             name: "stock",
             type: "number"
+        },
+        {
+            title: "Anmeldelser",
+            name: "reviews",
+            type: "array",
+            of: [{type: "reviews"}]
         }
     ]
 }

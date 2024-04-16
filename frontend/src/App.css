@@ -216,13 +216,30 @@ main article.productCard button {
 /* PRODUKTSIDE */
 #productpage {
     display: flex;
+    flex-wrap: nowrap;
     gap: 1rem;
 }
 #productpage h2 {
     text-align: left;
 }
-#productpage img {
+#productpage figure {
     max-width: 60%;
+}
+#productpage a {
+    color: var(--yellow);
+    background: var(--black);
+    padding: .5rem;
+    transition: ease-in-out .5s;
+    border-bottom: 5px solid var(--black);
+    text-decoration: none;
+}
+#productpage a:hover {
+    background: var(--green);
+    border-bottom: 5px solid var(--black);
+}
+#productpage img {
+    width: 100%;
+    border: 5px solid var(--black);
 }
 .priceview {
     font-size: 2rem;
@@ -230,8 +247,10 @@ main article.productCard button {
 }
 #productpage article {
     flex-grow: 1;
+    padding-top: 2rem;
 }
 #productpage .metainfo {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
