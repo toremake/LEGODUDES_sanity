@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import {Link, useParams} from 'react-router-dom'
-import { fetchProductBySlug } from '../../sanity/services/productServices'
+import { fetchProductBySlug, updateReview } from '../../sanity/services/productServices'
 
 //Komponent for å hente et bestemt produkt basert på produktets slug i Sanity
 export default function ProductPage() {
@@ -20,7 +20,13 @@ export default function ProductPage() {
     }
     const handleRatingChange = (e) => {
         e.preventDefault()
-        setRating(e.target.value)
+        setRating(Number(e.target.value))
+    }
+    //handleSubmit-funksjon for når en bruker sender en anmeldelse
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        const result = await updateReview(product._id, reviewer, comment, rating)
+        console.log(result)
     }
 
 
@@ -75,7 +81,7 @@ export default function ProductPage() {
                                 <option value="5">5</option>
                             </select>
                         </p>
-                        <p><button>Send anmeldelse</button></p>
+                        <p><button onClick={handleSubmit}>Send anmeldelse</button></p>
                     </form>
                     {
                         product?.reviews.map((r, i) => <p key={i}>
