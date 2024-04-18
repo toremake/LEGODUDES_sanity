@@ -8,6 +8,7 @@ export default function ProductPage() {
     const [reviewer, setReviewer] = useState("")
     const [comment, setComment] = useState("")
     const [rating, setRating] = useState(0)
+    const [formMessage, setFormMessage] = useState("")
 
     //handeChange-funksjoner for felter
     const handleReviewerChange = (e) => {
@@ -20,13 +21,24 @@ export default function ProductPage() {
     }
     const handleRatingChange = (e) => {
         e.preventDefault()
-        setRating(Number(e.target.value))
+        setRating(e.target.value)
     }
     //handleSubmit-funksjon for når en bruker sender en anmeldelse
     const handleSubmit = async (e) => {
         e.preventDefault()
-        const result = await updateReview(product._id, reviewer, comment, rating)
-        console.log(result)
+        if(rating === 0) {
+            setFormMessage("Du må sette en vurdering.")
+        } else {
+            const result = await updateReview(product._id, reviewer, comment, rating)
+            if(result == "Success") {
+                setFormMessage("Din anmeldelse er registrert!")
+                product.reviews.push({reviewer: reviewer, comment: comment, rating: rating})
+            } else {
+                setFormMessage(result)
+            }
+            console.log(result)
+        }
+        
     }
 
 
@@ -73,7 +85,8 @@ export default function ProductPage() {
                         </p>
                         <p>
                             <label htmlFor="rating">Vurdering:</label><br />
-                            <select name="rating" id="rating" onChange={handleRatingChange}>
+                            <select name="rating" id="rating" required onChange={handleRatingChange}>
+                                <option value="">Velg din vurdering</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -81,10 +94,11 @@ export default function ProductPage() {
                                 <option value="5">5</option>
                             </select>
                         </p>
+                        <p id="formmessage">{formMessage}</p>
                         <p><button onClick={handleSubmit}>Send anmeldelse</button></p>
                     </form>
                     {
-                        product?.reviews.map((r, i) => <p key={i}>
+                        product?.reviews?.map((r, i) => <p key={i}>
                             <strong>{r.reviewer}</strong><br />
                             {r.comment}<br />
                             Vurdering: {r.rating}
