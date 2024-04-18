@@ -3,6 +3,7 @@ import {Link, useParams} from 'react-router-dom'
 import { fetchProductBySlug, updateReview } from '../../sanity/services/productServices'
 
 //Komponent for å hente et bestemt produkt basert på produktets slug i Sanity
+//Her setter vi også ting inn i Sanity, mer info: https://webtricks.blog/oppdatere-et-array-felt-i-en-innholdstype-i-sanity-fra-et-react-grensesnitt/
 export default function ProductPage() {
     //States for å lagre skjemainformasjon
     const [reviewer, setReviewer] = useState("")
@@ -26,12 +27,19 @@ export default function ProductPage() {
     //handleSubmit-funksjon for når en bruker sender en anmeldelse
     const handleSubmit = async (e) => {
         e.preventDefault()
+
+        //Vi må kontrollere om rating er 0 (standard verdi i state). Er den det, må brukeren fylle inn en vurdering.
         if(rating === 0) {
             setFormMessage("Du må sette en vurdering.")
         } else {
+            //Ellers er en vurdering satt, og vi kan kjøre servicen som forsøker å sette vurderingen inn i Sanity
             const result = await updateReview(product._id, reviewer, comment, rating)
+            //Hvis Sanity returnerer et suksessfullt resultat av lagringen:
             if(result == "Success") {
+                //Sett en melding som skal vises i skjemaet
                 setFormMessage("Din anmeldelse er registrert!")
+                //Midlertidig oppdater review-arrayen i product-staten mens vi venter på at 
+                //sanity er ferdig med å lagre anmeldelsen og kan sende den tilbake til nettapplikasjonen
                 product.reviews.push({reviewer: reviewer, comment: comment, rating: rating})
             } else {
                 setFormMessage(result)

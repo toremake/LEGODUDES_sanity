@@ -33,6 +33,7 @@ export async function fetchProductBySlug(slug) {
 }
 
 //Funksjon som tar imot informasjon og oppdaterer reviews-arrayen i et produkt
+//Mer informasjon/tutorial: https://webtricks.blog/oppdatere-et-array-felt-i-en-innholdstype-i-sanity-fra-et-react-grensesnitt/
 export async function updateReview(productid,reviewer,comment,rating) {
     const result = await writeClient
     .patch(productid).setIfMissing({reviews: []})
